@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>QCWeb2 - experimental version</title>
+<style>
+body {
+  margin: 0px;
+  padding: 0px;
+  /* overflow: hidden; */
+}
+</style>
+<script src='../../../stats.js/build/stats.min.js'></script>
+<script>'use strict'
+let stats
+if (typeof Stats !== 'undefined') {
+  window.addEventListener('load', () => {
+    stats = new Stats()
+    stats.showPanel(0)
+    stats.dom.style.position = 'fixed'
+    stats.dom.style.left = null
+    stats.dom.style.right = '5px'
+    stats.dom.style.top = '5px'
+    document.body.appendChild(stats.dom)
+  })
+}
+</script>
+<script type="module">
+import {
+  RealAlgebra,
+  Quasicrystal,
+  fromQCStrcInputs,
+  QCWeb2Experimental as QCWeb2 } from '../qc-tools.min.mjs'
+
+let rnum = new RealAlgebra(1e-10)
+
+let qcw2
+
+async function init () {
+  // const test = await fetch('./alpdmn1d.str')
+  //   .then(response => response.text())
+  // const text3 = await fetch('./alpdmnfnl.pod')
+  //   .then(response => response.text())
+  // fromQCStrcInputs(test, text3)
+
+
+  const qc = await fetch('./kgy-bmmp.json')
+    .then(response => response.text())
+    .then(text => JSON.parse(text, Quasicrystal.reviver(rnum)))
+  const mtau = -(1 + Math.sqrt(5)) / 2
+  const lnum = qc._lnum
+  // qc._phasonMatrix = lnum.sdiv(lnum.$(1, 0, 0, 0, 1, 0, 0, 0, 1).setDim(3, 3),
+  //   (mtau ** 3))
+  // delete qc._atomicSurface['m5']
+  // delete qc._atomicSurface['mp5']
+  const canvas = document.getElementById('canvas')
+  canvas.width = 1024
+  canvas.height = 768
+  qcw2 = new QCWeb2(canvas, qc, {
+    rCutParCartnMax: 7,
+    colourRadiusTable: {
+      'm0': [255, 0, 0, 255],
+      'm5': [255, 255, 0, 255],
+      'mp5': [0, 255, 0, 255],
+      'mp0': [0, 255, 255, 255],
+      'b0': [0, 0, 255, 255]
+    }
+  })
+  qcw2.setMouseEvent()
+  qcw2.setWheelEvent()
+  const gl = qcw2.gl
+  let [panel1, panel2] = qcw2.panelAt(400, 400).vsplit(600)
+  let [panel11, panel12] = panel2.split(768 / 2)
+  let [panel21, panel22] = panel12.vsplit(850)
+  qcw2.setPanelTarget(panel1)
+  qcw2.setPanelTarget(panel11, 0)
+  qcw2.setPanelTarget(panel21, 2)
+  qcw2.setPanelTarget(panel22, 1)
+  qcw2.ui.showAtoms = true
+  qcw2.ui.showODs = true
+  qcw2.ui.showODsOnlyAsym = false
+
+  canvas.addEventListener('mousemove', (evt) => {
+    const info = qcw2.getInfoAt(...qcw2.canvasCoordOf(evt.clientX, evt.clientY))
+    if (info) {
+      // console.log(info)
+    }
+  })
+
+  /*
+  const p0 = qcw2.createPanel(0, 0, 768 / 2, 768 / 2, cameraPar, light, true)
+  let atomPosList = [
+    0, 0, 0,
+    0.5, 0.3, 0]
+  let atomColorRadiusList = [
+    1, 1, 0, 0.1,
+    0, 1, 1, 0.1]
+  p0.model.push({ draw: true, drawAtoms: true, natoms: atomPosList.length / 3 })
+  p0.model[0].vboAtomPos = qcw2.createBufferData(gl.ARRAY_BUFFER,
+    new Float32Array(atomPosList), gl.STATIC_DRAW)
+  p0.model[0].vboAtomColorRadius = qcw2.createBufferData(gl.ARRAY_BUFFER,
+    new Float32Array(atomColorRadiusList), gl.STATIC_DRAW)
+  qcw2.createVaoDrawAtoms(p0.model[0])
+
+  const p1 = qcw2.createPanel(768 / 2, 512 / 2, 256 / 2, 256 / 2, cameraPerp, light, false)
+  let odList = qc.getAtomicSurfaceEntries()
+    .filter(([label, atomicSurface]) => atomicSurface.atomSiteLabel === 'n')
+    .reduce((arr, [label, atomicSurface]) => {
+      return arr
+    }, [0, 0, 0, 0, 0, 1, 1.0, 1, 0, 0, 0, 0, 1, 1.0, 0, 1, 0, 0, 0, 1, 1.0])
+  atomPosList = [
+    0, 0, 0,
+    0.5, 0.3, 0]
+  atomColorRadiusList = [
+    1, 1, 0, 0.1,
+    0, 1, 1, 0.1]
+  p1.model.push({ draw: true,
+    drawAtoms: true, natoms: atomPosList.length / 3,
+    drawFaces: true, nfaces: odList.length / 21 })
+  p1.model[0].vboAtomPos = qcw2.createBufferData(gl.ARRAY_BUFFER,
+    new Float32Array(atomPosList), gl.STATIC_DRAW)
+  p1.model[0].vboAtomColorRadius = qcw2.createBufferData(gl.ARRAY_BUFFER,
+    new Float32Array(atomColorRadiusList), gl.STATIC_DRAW)
+  qcw2.createVaoDrawAtoms(p1.model[0])
+  p1.model[0].vboFaces = qcw2.createBufferData(gl.ARRAY_BUFFER,
+    new Float32Array(odList), gl.STATIC_DRAW)
+  qcw2.createVaoDrawFaces(p1.model[0])
+  */
+
+  /*
+  const p2 = qcw2.createPanel(768, 256, 256, 256, cameraPerp, light, false)
+  atomList = [
+    0, 0, 0, 0.1, 1, 1, 0,
+    0.5, 0.3, 0, 0.1, 0, 1, 1]
+  p2.model.push({ draw: true, drawAtoms: true, natoms: atomList.length / 7 })
+  p2.model[0].vboAtoms = qcw2.createBufferData(gl.ARRAY_BUFFER,
+    new Float32Array(atomList), gl.STATIC_DRAW)
+  qcw2.createVaoDrawAtoms(p2.model[0])
+
+  const p3 = qcw2.createPanel(768, 0, 256, 256, cameraPerp, light, false)
+  atomList = [
+    0, 0, 0, 0.1, 1, 1, 0,
+    0.5, 0.3, 0, 0.1, 0, 1, 1]
+  p3.model.push({ draw: true, drawAtoms: true, natoms: atomList.length / 7 })
+  p3.model[0].vboAtoms = qcw2.createBufferData(gl.ARRAY_BUFFER,
+    new Float32Array(atomList), gl.STATIC_DRAW)
+  qcw2.createVaoDrawAtoms(p3.model[0])
+  */
+
+  window.requestAnimationFrame(loop)
+  window.removeEventListener('load', init)
+}
+
+function loop () {
+  stats && stats.begin()
+  qcw2.update()
+  stats && stats.end()
+  window.requestAnimationFrame(loop)
+}
+
+window.addEventListener('load', init)
+</script>
+
+</head>
+<body>
+
+<canvas id='canvas' style="
+  display: block;
+  margin: auto;
+  margin-top: 10px;
+  border: 6px solid black;
+  background: rgba(0, 0, 0, 0);
+  width: 1024px;
+  height: 768px;">
+HTML5 canvas tag is not supported.
+</canvas>
+
+</body>
+</html>

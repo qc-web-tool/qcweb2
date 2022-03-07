@@ -1,0 +1,75 @@
+/* SHOULD NOT BE CHANGED UNLESS OTHERWISE STATED */
+div.splittable-panel {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  margin: 0px;
+  border-width: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: auto;
+}
+div.splittable-panel-separator-container {
+  position: relative;
+  left: 0%;
+  top: 0%;
+  margin: 0px;
+  border-width: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+div.splittable-panel-v-separator {
+  position: relative;
+  left: calc(var(--width) / -2);
+  top: -1px;
+  width: var(--width);
+  height: calc(100% + 2px);
+  /* may be changed ... */
+  --width: 6px;
+  background-color: black;
+  cursor: col-resize;
+  /* ... may be changed */
+}
+div.splittable-panel-h-separator {
+  position: relative;
+  left: -1px;
+  top: calc(var(--height) / -2);
+  width: calc(100% + 2px);
+  height: var(--height);
+  /* may be changed ... */
+  --height: 6px;
+  background-color: black;
+  cursor: row-resize;
+  /* ... may be changed */
+}
+
+/* May be changed */
+div.splittable-panel-control-v-split {
+  margin: 2px;
+  padding: 2px;
+  border: 2px solid black;
+  border-radius: 6px;
+  background-color: black;
+  text-align: center;
+}
+div.splittable-panel-control-v-split::after {
+  content: 'V';
+  color: white;
+  font-weight: bold;
+}
+div.splittable-panel-control-h-split {
+  margin: 2px;
+  padding: 2px;
+  border: 2px solid black;
+  border-radius: 6px;
+  background-color: black;
+  text-align: center;
+}
+div.splittable-panel-control-h-split::after {
+  content: 'H';
+  color: white;
+  font-weight: bold;
+}

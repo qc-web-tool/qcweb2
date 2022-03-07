@@ -1,0 +1,177 @@
+@import 'splittable-panel.css';
+/* SHOULD NOT BE CHANGED UNLESS OTHERWISE STATED */
+.qcweb2 {
+  width: 100vw;
+  height: 100vh;
+}
+.qcweb2 .viewer {
+  position: relative;
+  /* may be changed ... */
+  border: 3px solid black;
+  margin: auto;
+  width: 95%;
+  height: 92%;
+  background: white;
+  /* ... may be changed */
+}
+.qcweb2 .canvas {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  margin: 0px;
+  border-width: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: auto;
+}
+.qcweb2 .viewer-control {
+  position: absolute;
+  bottom: 0%;
+  left: 0%;
+  bottom: 0%;
+  margin: 5px;
+  opacity: 0.5;
+  transition: opacity .1s ease-out;
+}
+.qcweb2 .viewer-control:hover {
+  opacity: 1.0;
+}
+.qcweb2 .viewer-control > div {
+  float: left;
+  margin: 2px;
+  padding: 2px;
+  border: 2px solid black;
+  border-radius: 6px;
+  background-color: black;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+.qcweb2 .viewer-control > div::before {
+  content: '\200B';
+}
+.qcweb2 .viewer-control > div.camera-is-orthographic::before {
+  content: '<';
+}
+.qcweb2 .viewer-control > div.camera-is-orthographic.on::before {
+  content: '=';
+}
+.qcweb2 .viewer-control > div.fps::before {
+  content: 'FPS: ';
+}
+.qcweb2 .viewer-control > div.show-atoms,
+.qcweb2 .viewer-control > div.show-asym-bonds,
+.qcweb2 .viewer-control > div.show-bonds,
+.qcweb2 .viewer-control > div.show-vertices,
+.qcweb2 .viewer-control > div.show-edges,
+.qcweb2 .viewer-control > div.show-faces,
+.qcweb2 .viewer-control > div.show-ods,
+.qcweb2 .viewer-control > div.info-type,
+.qcweb2 .viewer-control > div.info-od,
+.qcweb2 .viewer-control > div.info-ssg,
+.qcweb2 .viewer-control > div.info-latt {
+  background-color: white;
+  color: black;
+}
+.qcweb2 .viewer-control > div.show-atoms.on,
+.qcweb2 .viewer-control > div.show-asym-bonds.on,
+.qcweb2 .viewer-control > div.show-bonds.on,
+.qcweb2 .viewer-control > div.show-vertices.on,
+.qcweb2 .viewer-control > div.show-edges.on,
+.qcweb2 .viewer-control > div.show-faces.on,
+.qcweb2 .viewer-control > div.show-ods.on,
+.qcweb2 .viewer-control > div.reset-origin.on,
+.qcweb2 .viewer-control > div.od-base-opacity.on,
+.qcweb2 .viewer-control > div.camera-par.on,
+.qcweb2 .viewer-control > div.camera-perp.on,
+.qcweb2 .viewer-control > div.info-type.on,
+.qcweb2 .viewer-control > div.info-od.on,
+.qcweb2 .viewer-control > div.info-ssg.on,
+.qcweb2 .viewer-control > div.info-latt.on {
+  background-color: black;
+  color: white;
+}
+.qcweb2 .viewer-control > div.show-atoms::before {
+  content: 'A'
+}
+.qcweb2 .viewer-control > div.show-asym-bonds::before {
+  content: 'aB'
+}
+.qcweb2 .viewer-control > div.show-bonds::before {
+  content: 'B'
+}
+.qcweb2 .viewer-control > div.show-vertices::before {
+  content: 'V'
+}
+.qcweb2 .viewer-control > div.show-edges::before {
+  content: 'E'
+}
+.qcweb2 .viewer-control > div.show-faces::before {
+  content: 'F'
+}
+.qcweb2 .viewer-control > div.show-ods::before {
+  content: 'O'
+}
+.qcweb2 .viewer-control > div.reset-origin::before {
+  content: 'O'
+}
+.qcweb2 .viewer-control > div.od-base-opacity::before {
+  content: 'OBO'
+}
+.qcweb2 .viewer-control > div.camera-par::before {
+  content: 'C\2225'
+}
+.qcweb2 .viewer-control > div.camera-perp::before {
+  content: 'C\22A5'
+}
+.qcweb2 .viewer-control > div.info-ssg::before {
+  content: 'SSG '
+}
+.qc-editor {
+  width: 95%;
+  margin: auto;
+}
+.qc-editor .react-tabs__tab-list {
+  margin: 0;
+}
+.qc-editor .react-tabs__tab-panel {
+  position: absolute;
+  z-index: 1;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.qc-editor input {
+  font-family: monospace;
+  padding: 2px;
+  margin: 6px;
+  width: 8em;
+  box-shadow: 0px 0px 5px black;
+}
+.qc-editor .item-editor-missing input {
+  box-shadow: 0px 0px 5px red;
+}
+.qc-editor .item-editor-stored-alert input {
+  box-shadow: 0px 0px 5px red;
+}
+.qc-editor .item-editor-default input {
+  box-shadow: 0px 0px 5px green;
+}
+.qc-editor .item-editor-evaluated input {
+  box-shadow: 0px 0px 5px blue; 
+}
+.qc-editor table {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+.qc-editor th {
+  font-weight: normal;
+  border: 1px solid black;
+}
+.qc-editor td {
+  border: 1px solid black;
+}
+.qc-editor .alert-text {
+  font-size: 80%;
+  color: red;
+  font-family: monospace;
+}
