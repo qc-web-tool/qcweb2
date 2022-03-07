@@ -3,5 +3,5 @@
 node_modules
 doc
 coverage
-*.min.*js
+# *.min.*js
 *.tgz
