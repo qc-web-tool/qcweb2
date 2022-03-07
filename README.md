@@ -1,2 +1,2 @@
-# qc-web-tool-experiment
+# qcweb
 準結晶補空間シミュレーションを行うWebアプリケーションの研究開発
