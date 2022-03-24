@@ -340,6 +340,14 @@ const QCEditorMain = ({ resetQCData, resetPanels }) => {
     },
     [dispatch, resetQCData]
   );
+
+  const onClickDownloadButton = () => {
+    const link = document.createElement("a");
+    link.href = "./sample-data.zip";
+    link.setAttribute("download", "sample-data");
+    link.click();
+  };
+
   return useMemo(
     () =>
       React.createElement(
@@ -349,7 +357,12 @@ const QCEditorMain = ({ resetQCData, resetPanels }) => {
           type: "file",
           accept: ".json,.cif",
           onChange,
-        })
+        }),
+        React.createElement(
+          "button",
+          { onClick: onClickDownloadButton },
+          "Download sample data"
+        )
       ),
     [onChange]
   );
