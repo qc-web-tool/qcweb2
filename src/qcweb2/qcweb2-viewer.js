@@ -344,6 +344,17 @@ export const QCWeb2ViewerCreator = (
         ),
         React.createElement(
           SwitchBox, { className: FPS_CLASS_NAME, value: fps }
+        ),
+        React.createElement(
+          SwitchBox,
+          {
+            className: 'show-help',
+            title: 'show help',
+            on: true,
+            onClick: () =>
+              qcweb2CoreHandler.current &&
+              qcweb2CoreHandler.current.showHelp()
+          }
         )
       ),
       [
