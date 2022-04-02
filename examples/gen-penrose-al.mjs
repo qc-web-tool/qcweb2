@@ -104,7 +104,20 @@ const odAsym = new OccupationDomain('Al1', p4)
 const as = new AtomicSurface('Al', 1.0, beta, odAsym)
 qc.setAtomicSurface('Al1a', as)
 
-console.log(JSON.stringify(qc))
+qc.aux = {
+  "geom_bond": [
+    {
+      "atom_site_label_1": "Al1",
+      "symop_id_1": 1,
+      "cell_translation_1": [0, 0, 0, 0, 0],
+      "atom_site_label_2": "Al1",
+      "symop_id_2": 1,
+      "cell_translation_2": [0, 0, 0, 0, 1]
+    }
+  ]
+}
+
+console.log(JSON.stringify(qc, null, 2))
 // qc = JSON.parse(JSON.stringify(qc), Quasicrystal.reviver(r))
 
 /*

@@ -1,5 +1,26 @@
 {
-  "aux": {},
+  "aux": {
+    "geom_bond": [
+      {
+        "atom_site_label_1": "Al1",
+        "symop_id_1": 1,
+        "cell_translation_1": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "atom_site_label_2": "Al1",
+        "symop_id_2": 1,
+        "cell_translation_2": [
+          0,
+          0,
+          0,
+          1
+        ]
+      }
+    ]
+  },
   "reviver": "@kkitahara/qc-tools:Quasicrystal",
   "version": "experimental",
   "dim": 4,
