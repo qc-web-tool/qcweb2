@@ -3459,7 +3459,7 @@ export class QCWeb2Core {
       // this.ui.doubleClicked ||
       this.ui.shiftDoubleClicked ||
       this.ui.ctrlShiftDoubleClicked ||
-      this.ui.ctrlAltDoubleClicked
+      this.ui.ctrlDoubleClicked
         ? this.requestId
         : false
     const updateUI = createSelector(
@@ -3620,7 +3620,7 @@ export class QCWeb2Core {
         if (
           this.ui.shiftDoubleClicked ||
           this.ui.ctrlShiftDoubleClicked ||
-          this.ui.ctrlAltDoubleClicked
+          this.ui.ctrlDoubleClicked
         ) {
           this.readBackInfo(true)
         }
@@ -3736,7 +3736,7 @@ export class QCWeb2Core {
               }
             }
           }
-          if (this.ui.ctrlAltDoubleClicked) {
+          if (this.ui.ctrlDoubleClicked) {
             const setAt = [
               (currentViewport.x + currentViewport.width / 2) / width,
               1 - (currentViewport.y + currentViewport.height / 2) / height
@@ -4989,7 +4989,7 @@ export class QCWeb2Core {
     // this.ui.doubleClicked = false
     this.ui.shiftDoubleClicked = false
     this.ui.ctrlShiftDoubleClicked = false
-    this.ui.ctrlAltDoubleClicked = false
+    this.ui.ctrlDoubleClicked = false
   }
 
   onMouseDown (e) {
@@ -5042,8 +5042,8 @@ export class QCWeb2Core {
       this.ui.ctrlShiftDoubleClicked = true
     } else if (!e.ctrlKey && !e.altKey && e.shiftKey) {
       this.ui.shiftDoubleClicked = true
-    } else if (e.ctrlKey && e.altKey && !e.shiftKey) {
-      this.ui.ctrlAltDoubleClicked = true
+    } else if (e.ctrlKey && !e.altKey && !e.shiftKey) {
+      this.ui.ctrlDoubleClicked = true
     } else {
       // this.ui.doubleClicked = true
     }
@@ -5058,6 +5058,7 @@ export class QCWeb2Core {
     } else {
       this.ui.wheelDeltaY += e.deltaY
     }
+    e.preventDefault()
   }
 
   toggleShowAtoms () {
@@ -5189,6 +5190,22 @@ export class QCWeb2Core {
     if (Number.isFinite(odBaseOpacity)) {
       this.odBaseOpacity = odBaseOpacity
     }
+  }
+
+  showHelp () {
+    let str = ''
+    str += 'Drag: rotate\n'
+    str += 'Wheel: zoom\n'
+    str += 'Shift + Drag: move\n'
+    str += 'Shift + Wheel: move along the view direction\n'
+    str += 'Shift + Double-click an atom: move such that the selected atom is at the centre\n'
+    str += 'Shift + Double-click background: move slightly in a random direction in both parallel and perpendicular spaces\n'
+    str += 'Ctrl + Wheel: change the range of displaying the model\n'
+    str += 'Ctrl + Double-click an atom in parallel space: switch to the perpendicular space that contains the selected atom\n'
+    str += 'Ctrl + Double-click in perpendicular space: switch to the parallel space\n'
+    str += 'Ctrl + Shift + Double-click an atom: highlight the selected atom\n'
+    str += 'Ctrl + Shift + Double-click background: stop highlighting'
+    window.alert(str)
   }
 }
 

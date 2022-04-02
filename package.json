@@ -1,6 +1,6 @@
 {
   "name": "@kkitahara/qc-tools",
-  "version": "0.2.2",
+  "version": "0.1.0-alpha",
   "description": "ECMAScript modules for manipulating quasicrystal structures.",
   "keywords": [
     "Crystallography",
@@ -26,7 +26,7 @@
     "bundle": "rollup -c",
     "bundle-legacy": "rollup -c legacy.rollup.config.js",
     "test": "npm run examples-test-gen && npm run lint && npm run examples-test",
-    "browse": "browser-sync start --server \"./\" --watch --startPath ./examples/viewer-react.html",
+    "browse": "browser-sync start --no-online --server \"./\" --watch --startPath ./examples/viewer-react.html",
     "watch": "onchange \"./src/**\" -- npm run bundle",
     "dev": "run-s clean bundle && run-p watch browse"
   },

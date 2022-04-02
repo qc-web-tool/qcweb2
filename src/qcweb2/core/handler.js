@@ -135,6 +135,11 @@ export class QCWeb2CoreHandler {
     const ctx = context.get(this)
     ctx.setODBaseOpacity()
   }
+
+  showHelp () {
+    const ctx = context.get(this)
+    ctx.showHelp()
+  }
 }
 
 /* @license-end */

@@ -71,7 +71,7 @@ let beta = qc.genADTensorBetaNoPhasonFromUCartn([
 
 let pg = qc.spgPerpCartnNoPhasonAtomSite('Al1')
 let odAsym =
-  qc.genPseudoWSCellPerpAsymNoPhason('Al1', [[1, 0, 1, 1]], undefined, 100)
+  qc.genPseudoWSCellPerpAsymNoPhason('Al1', [[1, 0, 0, 1]], undefined, 100)
 
 let as = new AtomicSurface('Al', 1.0, beta, odAsym)
 qc.setAtomicSurface('Al1a', as)
