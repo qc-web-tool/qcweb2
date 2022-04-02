@@ -3459,7 +3459,7 @@ export class QCWeb2Core {
       // this.ui.doubleClicked ||
       this.ui.shiftDoubleClicked ||
       this.ui.ctrlShiftDoubleClicked ||
-      this.ui.ctrlAltDoubleClicked
+      this.ui.ctrlDoubleClicked
         ? this.requestId
         : false
     const updateUI = createSelector(
@@ -3620,7 +3620,7 @@ export class QCWeb2Core {
         if (
           this.ui.shiftDoubleClicked ||
           this.ui.ctrlShiftDoubleClicked ||
-          this.ui.ctrlAltDoubleClicked
+          this.ui.ctrlDoubleClicked
         ) {
           this.readBackInfo(true)
         }
@@ -3736,7 +3736,7 @@ export class QCWeb2Core {
               }
             }
           }
-          if (this.ui.ctrlAltDoubleClicked) {
+          if (this.ui.ctrlDoubleClicked) {
             const setAt = [
               (currentViewport.x + currentViewport.width / 2) / width,
               1 - (currentViewport.y + currentViewport.height / 2) / height
@@ -4989,7 +4989,7 @@ export class QCWeb2Core {
     // this.ui.doubleClicked = false
     this.ui.shiftDoubleClicked = false
     this.ui.ctrlShiftDoubleClicked = false
-    this.ui.ctrlAltDoubleClicked = false
+    this.ui.ctrlDoubleClicked = false
   }
 
   onMouseDown (e) {
@@ -5042,8 +5042,8 @@ export class QCWeb2Core {
       this.ui.ctrlShiftDoubleClicked = true
     } else if (!e.ctrlKey && !e.altKey && e.shiftKey) {
       this.ui.shiftDoubleClicked = true
-    } else if (e.ctrlKey && e.altKey && !e.shiftKey) {
-      this.ui.ctrlAltDoubleClicked = true
+    } else if (e.ctrlKey && !e.altKey && !e.shiftKey) {
+      this.ui.ctrlDoubleClicked = true
     } else {
       // this.ui.doubleClicked = true
     }
@@ -5058,6 +5058,7 @@ export class QCWeb2Core {
     } else {
       this.ui.wheelDeltaY += e.deltaY
     }
+    e.preventDefault()
   }
 
   toggleShowAtoms () {
