@@ -36,7 +36,7 @@ export * from './legacy/atom-site.mjs'
 export * from './legacy/atomic-surface.mjs'
 export * from './legacy/occupation-domain.mjs'
 
-export * from './legacy/from-cif-string.mjs'
+// export * from './legacy/from-cif-string.mjs'
 export * from './legacy/from-qcstrc-inputs.mjs'
 
 /* @license-end */

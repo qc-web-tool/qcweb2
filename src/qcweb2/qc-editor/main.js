@@ -355,7 +355,7 @@ const QCEditorMain = ({ resetQCData, resetPanels }) => {
         null,
         React.createElement("input", {
           type: "file",
-          accept: ".json,.cif",
+          accept: ".json", // ".json,.cif",
           onChange,
         }),
         React.createElement(
