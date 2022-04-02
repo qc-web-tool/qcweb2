@@ -128,6 +128,9 @@
 .qcweb2 .viewer-control > div.info-ssg::before {
   content: "SSG ";
 }
+.qcweb2 .viewer-control > div.show-help::before {
+  content: "?";
+}
 .qc-editor {
   width: 95%;
   margin: auto;

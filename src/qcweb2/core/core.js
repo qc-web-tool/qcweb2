@@ -5191,6 +5191,22 @@ export class QCWeb2Core {
       this.odBaseOpacity = odBaseOpacity
     }
   }
+
+  showHelp () {
+    let str = ''
+    str += 'Drag: rotate\n'
+    str += 'Wheel: zoom\n'
+    str += 'Shift + Drag: move\n'
+    str += 'Shift + Wheel: move along the view direction\n'
+    str += 'Shift + Double-click an atom: move such that the selected atom is at the centre\n'
+    str += 'Shift + Double-click background: move slightly in a random direction in both parallel and perpendicular spaces\n'
+    str += 'Ctrl + Wheel: change the range of displaying the model\n'
+    str += 'Ctrl + Double-click an atom in parallel space: switch to the perpendicular space that contains the selected atom\n'
+    str += 'Ctrl + Double-click in perpendicular space: switch to the parallel space\n'
+    str += 'Ctrl + Shift + Double-click an atom: highlight the selected atom\n'
+    str += 'Ctrl + Shift + Double-click background: stop highlighting'
+    window.alert(str)
+  }
 }
 
 /* @license-end */
