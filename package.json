@@ -1,6 +1,6 @@
 {
   "name": "@kkitahara/qc-tools",
-  "version": "0.2.2",
+  "version": "0.1.0-alpha",
   "description": "ECMAScript modules for manipulating quasicrystal structures.",
   "keywords": [
     "Crystallography",
