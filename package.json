@@ -1,22 +1,14 @@
 {
   "name": "@kkitahara/qc-tools",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0-alpha.2",
   "description": "ECMAScript modules for manipulating quasicrystal structures.",
   "keywords": [
     "Crystallography",
     "Quasicrystal"
   ],
-  "homepage": "https://gitlab.com/kkitahara/qc-tools#readme",
-  "bugs": {
-    "url": "https://gitlab.com/kkitahara/qc-tools/issues"
-  },
   "license": "Apache-2.0",
   "author": "Koichi Kitahara <kkitahara5101@gmail.com>",
   "main": "src/index.mjs",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@gitlab.com/kkitahara/qc-tools.git"
-  },
   "scripts": {
     "doc": "esdoc -c .esdoc.json",
     "lint": "standard --verbose \"src/**/*.*js\" \"test/**/*.*js\" | snazzy",

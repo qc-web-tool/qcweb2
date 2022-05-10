@@ -12,7 +12,7 @@ import {
 } from '../src/index.mjs'
 const r = new RealAlgebra(1e-5)
 
-const a = 3
+const a = Math.sqrt(5) / 2
 const t = (1 + Math.sqrt(5)) / 2
 const p = 2 / Math.sqrt(5)
 const omega = 2 / 5 * Math.PI
@@ -102,6 +102,7 @@ const p4 = p3d.mul(acceptance, p3d.mul(p3a, p3b))
 const odAsym = new OccupationDomain('Al1', p4)
 
 const as = new AtomicSurface('Al', 1.0, beta, odAsym)
+as.displayRadius = 0.5
 qc.setAtomicSurface('Al1a', as)
 
 qc.aux = {

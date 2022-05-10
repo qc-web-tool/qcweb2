@@ -1,81 +1,77 @@
-import { /* ExactRealAlgebra, */ RealAlgebra } from '@kkitahara/real-algebra'
-// import { LinearAlgebra } from '@kkitahara/linear-algebra'
-// import { PolytopeAlgebra } from '@kkitahara/polytope-algebra'
+import { ExactRealAlgebra, RealAlgebra } from '@kkitahara/real-algebra'
+import { LinearAlgebra } from '@kkitahara/linear-algebra'
+import { PolytopeAlgebra } from '@kkitahara/polytope-algebra'
 import {
   Quasicrystal,
   AtomType,
   AtomicSurface,
-  //   OccupationDomain,
-  //   XRayRadiation,
+  OccupationDomain,
+  XRayRadiation,
   scatCromerMannCoeffs,
   scatHiAngFoxCoeffs
 } from '../src/index.mjs'
 const r = new RealAlgebra(1e-5)
 
-const a = 1
+const t = r.iadd(r.$(1, 2), r.$(1, 2, 5))
 
 const aPar = [
-  a * (Math.cos(2 * Math.PI / 5) - 1),
-  a * (Math.cos(4 * Math.PI / 5) - 1),
-  a * (Math.cos(6 * Math.PI / 5) - 1),
-  a * (Math.cos(8 * Math.PI / 5) - 1),
-  a * Math.sin(2 * Math.PI / 5),
-  a * Math.sin(4 * Math.PI / 5),
-  a * Math.sin(6 * Math.PI / 5),
-  a * Math.sin(8 * Math.PI / 5)]
+  1, t, t, 0, -1, 0,
+  t, 0, 0, 1, t, 1,
+  0, 1, -1, -t, 0, t]
 const aPerp = [
-  a * (Math.cos(4 * Math.PI / 5) - 1),
-  a * (Math.cos(8 * Math.PI / 5) - 1),
-  a * (Math.cos(2 * Math.PI / 5) - 1),
-  a * (Math.cos(6 * Math.PI / 5) - 1),
-  a * Math.sin(4 * Math.PI / 5),
-  a * Math.sin(8 * Math.PI / 5),
-  a * Math.sin(2 * Math.PI / 5),
-  a * Math.sin(6 * Math.PI / 5)]
+  t, -1, -1, 0, -t, 0,
+  -1, 0, 0, t, -1, t,
+  0, t, -t, 1, 0, -1]
 
-const qc = new Quasicrystal(r, 4, aPar, aPerp)
+const qc = new Quasicrystal(r, 6, aPar, aPerp)
 // const nr = qc._rnum
 // const nl = qc._lnum
 // const l = qc._lalg
-// const p2d = qc._palg
+const p3d = qc._palg
 
 const generators = [
   qc.genSGSymop([
-    -1, 0, 0, 0,
-    0, -1, 0, 0,
-    0, 0, -1, 0,
-    0, 0, 0, -1], [0, 0, 0, 0]),
+    1, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 1,
+    0, 1, 0, 0, 0, 0,
+    0, 0, 1, 0, 0, 0,
+    0, 0, 0, 1, 0, 0,
+    0, 0, 0, 0, 1, 0], [0, 0, 0, 0, 0, 0]),
   qc.genSGSymop([
-    0, 0, -1, 0,
-    0, 0, 0, -1,
-    1, 1, 1, 1,
-    -1, 0, 0, 0], [0, 0, 0, 0]),
+    0, 0, 0, 0, 1, 0,
+    0, -1, 0, 0, 0, 0,
+    0, 0, -1, 0, 0, 0,
+    0, 0, 0, 0, 0, 1,
+    1, 0, 0, 0, 0, 0,
+    0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 0]),
   qc.genSGSymop([
-    0, -1, 0, 0,
-    -1, 0, 0, 0,
-    1, 1, 1, 1,
-    0, 0, 0, -1], [0, 0, 0, 0])]
-const ssg = qc.genSGFractFromGenerators(generators, 20)
-// console.log(ssg.order)
+    -1, 0, 0, 0, 0, 0,
+    0, -1, 0, 0, 0, 0,
+    0, 0, -1, 0, 0, 0,
+    0, 0, 0, -1, 0, 0,
+    0, 0, 0, 0, -1, 0,
+    0, 0, 0, 0, 0, -1], [0, 0, 0, 0, 0, 0])]
+const ssg = qc.genSGFractFromGenerators(generators, 120)
 qc.setSSGFractNoPhason(ssg)
 
 const al = new AtomType(scatCromerMannCoeffs.Al, scatHiAngFoxCoeffs.Al)
 qc.setAtomType('Al', al)
 
-qc.setAtomSite('Al1', [0, 0, 0, 0])
+qc.setAtomSite('Al1', [0, 0, 0, 0, 0, 0])
 
 const beta = qc.genADTensorBetaNoPhasonFromUCartn([
-  0.005, 0, 0, 0,
-  0, 0.005, 0, 0,
-  0, 0, 0, 0,
-  0, 0, 0, 0])
+  0.1, 0, 0, 0, 0, 0,
+  0, 0.1, 0, 0, 0, 0,
+  0, 0, 0.1, 0, 0, 0,
+  0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0])
 
 const pg = qc.spgPerpCartnNoPhasonAtomSite('Al1')
 const odAsym =
-  qc.genPseudoWSCellPerpAsymNoPhason('Al1', [[1, -1, -1, 1]], undefined, 100)
+  qc.genPseudoWSCellPerpAsymNoPhason('Al1', [[1, 0, 0, -1, 1, -1]], undefined, 100)
 
 const as = new AtomicSurface('Al', 1.0, beta, odAsym)
-as.displayRadius = 0.5
 qc.setAtomicSurface('Al1a', as)
 
 qc.aux = {
@@ -83,10 +79,10 @@ qc.aux = {
     {
       atom_site_label_1: 'Al1',
       symop_id_1: 1,
-      cell_translation_1: [0, 0, 0, 0],
+      cell_translation_1: [0, 0, 0, 0, 0, 0],
       atom_site_label_2: 'Al1',
       symop_id_2: 1,
-      cell_translation_2: [0, 0, 1, 0]
+      cell_translation_2: [0, 0, 0, 0, 0, 1]
     }
   ]
 }
