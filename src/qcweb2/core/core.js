@@ -5038,11 +5038,11 @@ export class QCWeb2Core {
   }
 
   onDoubleClick (e) {
-    if ((e.ctrlKey || e.altKey) && e.shiftKey) {
+    if ((e.ctrlKey || e.altKey || e.metaKey) && e.shiftKey) {
       this.ui.ctrlShiftDoubleClicked = true
-    } else if (!(e.ctrlKey || e.altKey) && e.shiftKey) {
+    } else if (!(e.ctrlKey || e.altKey || e.metaKey) && e.shiftKey) {
       this.ui.shiftDoubleClicked = true
-    } else if ((e.ctrlKey || e.altKey) && !e.shiftKey) {
+    } else if ((e.ctrlKey || e.altKey || e.metaKey) && !e.shiftKey) {
       this.ui.ctrlDoubleClicked = true
     } else {
       // this.ui.doubleClicked = true
@@ -5053,7 +5053,7 @@ export class QCWeb2Core {
   onWheel (e) {
     if (e.shiftKey) {
       this.ui.shiftWheelDeltaY += e.deltaY
-    } else if (e.ctrlKey || e.altKey) {
+    } else if (e.ctrlKey || e.altKey || e.metaKey) {
       this.ui.ctrlWheelDeltaY += e.deltaY
     } else {
       this.ui.wheelDeltaY += e.deltaY
@@ -5200,11 +5200,11 @@ export class QCWeb2Core {
     str += 'Shift + Wheel: move along the view direction\n'
     str += 'Shift + Double-click an atom: move such that the selected atom is at the centre\n'
     str += 'Shift + Double-click background: move slightly in a random direction in both parallel and perpendicular spaces\n'
-    str += 'Ctrl (or Alt) + Wheel: change the range of displaying the model\n'
-    str += 'Ctrl (or Alt) + Double-click an atom in parallel space: switch to the perpendicular space that contains the selected atom\n'
-    str += 'Ctrl (or Alt) + Double-click in perpendicular space: switch to the parallel space\n'
-    str += 'Ctrl (or Alt) + Shift + Double-click an atom: highlight the selected atom\n'
-    str += 'Ctrl (or Alt) + Shift + Double-click background: stop highlighting'
+    str += 'Ctrl (or Alt or Meta) + Wheel: change the range of displaying the model\n'
+    str += 'Ctrl (or Alt or Meta) + Double-click an atom in parallel space: switch to the perpendicular space that contains the selected atom\n'
+    str += 'Ctrl (or Alt or Meta) + Double-click in perpendicular space: switch to the parallel space\n'
+    str += 'Ctrl (or Alt or Meta) + Shift + Double-click an atom: highlight the selected atom\n'
+    str += 'Ctrl (or Alt or Meta) + Shift + Double-click background: stop highlighting'
     window.alert(str)
   }
 }
